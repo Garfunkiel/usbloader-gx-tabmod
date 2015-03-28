@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX resource files.
  * This file is generated automatically.
- * Includes 200 files.
+ * Includes 206 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -235,6 +235,12 @@ extern const u32 gcncontroller_png_size;
 
 extern const u8 gcncontrollerR_png[];
 extern const u32 gcncontrollerR_png_size;
+
+extern const u8 gcn_tab_png[];
+extern const u32 gcn_tab_png_size;
+
+extern const u8 gcn_tab_gray_png[];
+extern const u32 gcn_tab_gray_png_size;
 
 extern const u8 gc_banner_bg_png[];
 extern const u32 gc_banner_bg_png_size;
@@ -491,6 +497,12 @@ extern const u32 unlock_png_size;
 extern const u8 unlock_gray_png[];
 extern const u32 unlock_gray_png_size;
 
+extern const u8 vcww_tab_png[];
+extern const u32 vcww_tab_png_size;
+
+extern const u8 vcww_tab_gray_png[];
+extern const u32 vcww_tab_gray_png_size;
+
 extern const u8 wbackground_png[];
 extern const u32 wbackground_png_size;
 
@@ -562,6 +574,12 @@ extern const u32 wiispeak_png_size;
 
 extern const u8 wiispeakR_png[];
 extern const u32 wiispeakR_png_size;
+
+extern const u8 wii_tab_png[];
+extern const u32 wii_tab_png_size;
+
+extern const u8 wii_tab_gray_png[];
+extern const u32 wii_tab_gray_png_size;
 
 extern const u8 zapper_png[];
 extern const u32 zapper_png_size;
@@ -688,6 +706,8 @@ RecourceFile Resources::RecourceFiles[] =
 	{"gameinfo2a.png", gameinfo2a_png, gameinfo2a_png_size, NULL, 0},
 	{"gcncontroller.png", gcncontroller_png, gcncontroller_png_size, NULL, 0},
 	{"gcncontrollerR.png", gcncontrollerR_png, gcncontrollerR_png_size, NULL, 0},
+	{"gcn_tab.png", gcn_tab_png, gcn_tab_png_size, NULL, 0},
+	{"gcn_tab_gray.png", gcn_tab_gray_png, gcn_tab_gray_png_size, NULL, 0},
 	{"gc_banner_bg.png", gc_banner_bg_png, gc_banner_bg_png_size, NULL, 0},
 	{"gc_icon_bg.png", gc_icon_bg_png, gc_icon_bg_png_size, NULL, 0},
 	{"guitar.png", guitar_png, guitar_png_size, NULL, 0},
@@ -773,6 +793,8 @@ RecourceFile Resources::RecourceFiles[] =
 	{"tooltip_tile.png", tooltip_tile_png, tooltip_tile_png_size, NULL, 0},
 	{"unlock.png", unlock_png, unlock_png_size, NULL, 0},
 	{"unlock_gray.png", unlock_gray_png, unlock_gray_png_size, NULL, 0},
+	{"vcww_tab.png", vcww_tab_png, vcww_tab_png_size, NULL, 0},
+	{"vcww_tab_gray.png", vcww_tab_gray_png, vcww_tab_gray_png_size, NULL, 0},
 	{"wbackground.png", wbackground_png, wbackground_png_size, NULL, 0},
 	{"wdialogue_box_startgame.png", wdialogue_box_startgame_png, wdialogue_box_startgame_png_size, NULL, 0},
 	{"wheel.png", wheel_png, wheel_png_size, NULL, 0},
@@ -797,6 +819,8 @@ RecourceFile Resources::RecourceFiles[] =
 	{"wiimote_poweroff_over.png", wiimote_poweroff_over_png, wiimote_poweroff_over_png_size, NULL, 0},
 	{"wiispeak.png", wiispeak_png, wiispeak_png_size, NULL, 0},
 	{"wiispeakR.png", wiispeakR_png, wiispeakR_png_size, NULL, 0},
+	{"wii_tab.png", wii_tab_png, wii_tab_png_size, NULL, 0},
+	{"wii_tab_gray.png", wii_tab_gray_png, wii_tab_gray_png_size, NULL, 0},
 	{"zapper.png", zapper_png, zapper_png_size, NULL, 0},
 	{"zapperR.png", zapperR_png, zapperR_png_size, NULL, 0},
 	{"bg_music.ogg", bg_music_ogg, bg_music_ogg_size, NULL, 0},

@@ -76,6 +76,12 @@ class GameBrowseMenu : public GuiWindow
 		GuiImageData * imgCategory;
 		GuiImageData * imgCategory_gray;
 		GuiImageData * imgLoaderMode;
+		GuiImageData * imgWiiGames;
+		GuiImageData * imgWiiGames_gray;
+		GuiImageData * imgGCNGames;
+		GuiImageData * imgGCNGames_gray;
+		GuiImageData * imgVCWWGames;
+		GuiImageData * imgVCWWGames_gray;
 		GuiImageData * homebrewImgData;
 		GuiImageData * homebrewImgDataOver;
 		GuiImageData * gameCover;
@@ -120,6 +126,12 @@ class GameBrowseMenu : public GuiWindow
 		GuiImage * homebrewImg;
 		GuiImage * homebrewImgOver;
 		GuiImage * gameCoverImg;
+		GuiImage * WiiGamesImg;
+		GuiImage * WiiGamesImg_g;
+		GuiImage * GCNGamesImg;
+		GuiImage * GCNGamesImg_g;
+		GuiImage * VCWWGamesImg;
+		GuiImage * VCWWGamesImg_g;
 
 		GuiText * usedSpaceTxt;
 		GuiText * gamecntTxt;
@@ -149,6 +161,9 @@ class GameBrowseMenu : public GuiWindow
 		GuiButton * homebrewBtn;
 		GuiButton * DownloadBtn;
 		GuiButton * idBtn;
+		GuiButton * WiiTabBtn;
+		GuiButton * GCNTabBtn;
+		GuiButton * VCWWTabBtn;
 
 		GuiTooltip * installBtnTT;
 		GuiTooltip * settingsBtnTT;

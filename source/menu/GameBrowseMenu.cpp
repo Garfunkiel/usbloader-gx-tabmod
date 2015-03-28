@@ -100,6 +100,12 @@ GameBrowseMenu::GameBrowseMenu()
 	imgCategory = Resources::GetImageData("category.png");
 	imgCategory_gray = Resources::GetImageData("category_gray.png");
 	imgLoaderMode = Resources::GetImageData("loader_mode.png");
+	imgWiiGames = Resources::GetImageData("wii_tab.png");
+	imgWiiGames_gray = Resources::GetImageData("wii_tab_gray.png");
+	imgGCNGames = Resources::GetImageData("gcn_tab.png");
+	imgGCNGames_gray = Resources::GetImageData("gcn_tab_gray.png");
+	imgVCWWGames = Resources::GetImageData("vcww_tab.png");
+	imgVCWWGames_gray = Resources::GetImageData("vcww_tab_gray.png");
 
 	homebrewImgData = Resources::GetImageData("browser.png");
 	homebrewImgDataOver = Resources::GetImageData("browser_over.png");
@@ -303,7 +309,34 @@ GameBrowseMenu::GameBrowseMenu()
 	dvdBtn = new GuiButton(dvdBtnImg_g, 0, ALIGN_LEFT, ALIGN_TOP, 0, 0,
 						   trigA, btnSoundOver, btnSoundClick2, 1, dvdBtnTT, 15, 52, 1, 3);
 	dvdBtn->SetSelectable(false);
-
+	
+	/* NEW BUTTON CODE */
+	WiiGamesImg = new GuiImage(imgWiiGames);
+	WiiGamesImg->SetWidescreen(Settings.widescreen);
+	WiiGamesImg_g = new GuiImage(imgWiiGames_gray);
+	WiiGamesImg_g->SetWidescreen(Settings.widescreen);
+	WiiTabBtn = new GuiButton(WiiGamesImg_g, WiiGamesImg, ALIGN_LEFT, ALIGN_TOP, 0, 0,
+						   trigA, btnSoundOver, btnSoundClick2, 0, 0, 0, 0, 0, 0);
+	WiiTabBtn->SetSelectable(false);
+	
+	GCNGamesImg = new GuiImage(imgGCNGames);
+	GCNGamesImg->SetWidescreen(Settings.widescreen);
+	GCNGamesImg_g = new GuiImage(imgGCNGames_gray);
+	GCNGamesImg_g->SetWidescreen(Settings.widescreen);
+	GCNTabBtn = new GuiButton(GCNGamesImg_g, GCNGamesImg, ALIGN_LEFT, ALIGN_TOP, 0, 0,
+						   trigA, btnSoundOver, btnSoundClick2, 0, 0, 0, 0, 0, 0);
+	GCNTabBtn->SetSelectable(false);
+	
+	VCWWGamesImg = new GuiImage(imgVCWWGames);
+	VCWWGamesImg->SetWidescreen(Settings.widescreen);
+	VCWWGamesImg_g = new GuiImage(imgVCWWGames_gray);
+	VCWWGamesImg_g->SetWidescreen(Settings.widescreen);
+	VCWWTabBtn = new GuiButton(VCWWGamesImg_g, VCWWGamesImg, ALIGN_LEFT, ALIGN_TOP, 0, 0,
+						   trigA, btnSoundOver, btnSoundClick2, 0, 0, 0, 0, 0, 0);
+	VCWWTabBtn->SetSelectable(false);
+	
+	/* END OF NEW BUTTON CODE */
+	
 	homebrewBtnTT = new GuiTooltip(tr( "Homebrew Launcher" ));
 	if (Settings.wsprompt) homebrewBtnTT->SetWidescreen(Settings.widescreen);
 	homebrewBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
@@ -424,6 +457,12 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete imgCategory;
 	delete imgCategory_gray;
 	delete imgLoaderMode;
+	delete imgWiiGames;
+	delete imgWiiGames_gray;
+	delete imgGCNGames;
+	delete imgGCNGames_gray;
+	delete imgVCWWGames;
+	delete imgVCWWGames_gray;
 	delete homebrewImgData;
 	delete homebrewImgDataOver;
 	delete gameCover;
@@ -468,6 +507,12 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete homebrewImg;
 	delete homebrewImgOver;
 	delete gameCoverImg;
+	delete WiiGamesImg;
+	delete WiiGamesImg_g;
+	delete GCNGamesImg;
+	delete GCNGamesImg_g;
+	delete VCWWGamesImg;
+	delete VCWWGamesImg_g;
 
 	delete GameIDTxt;
 	delete GameRegionTxt;
@@ -497,6 +542,9 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete homebrewBtn;
 	delete DownloadBtn;
 	delete idBtn;
+	delete WiiTabBtn;
+	delete GCNTabBtn;
+	delete VCWWTabBtn;
 
 	delete installBtnTT;
 	delete settingsBtnTT;
@@ -590,6 +638,22 @@ void GameBrowseMenu::ReloadBrowser()
 	{
 		sortTTText = tr("Sort alphabetically");
 		sortImgData = imgabcIcon;
+	}
+	
+	if(Settings.LoaderMode == MODE_WIIGAMES) {
+		WiiTabBtn->SetImage(WiiGamesImg);
+		GCNTabBtn->SetImage(GCNGamesImg_g);
+		VCWWTabBtn->SetImage(VCWWGamesImg_g);
+	}
+	else if(Settings.LoaderMode == MODE_GCGAMES) {
+		WiiTabBtn->SetImage(WiiGamesImg_g);
+		GCNTabBtn->SetImage(GCNGamesImg);
+		VCWWTabBtn->SetImage(VCWWGamesImg_g);
+	}
+	else if(Settings.LoaderMode == MODE_EMUCHANNELS) {
+		WiiTabBtn->SetImage(WiiGamesImg_g);
+		GCNTabBtn->SetImage(GCNGamesImg_g);
+		VCWWTabBtn->SetImage(VCWWGamesImg);
 	}
 
 	sortBtnTT->SetText(sortTTText);
@@ -819,28 +883,30 @@ void GameBrowseMenu::ReloadBrowser()
 		carouselBtn->SetImageOver(carouselBtnImg_g);
 
 		favoriteBtn->SetPosition(Settings.widescreen ? thInt("144 - bannergrid layout favorite btn pos x widescreen") : thInt("100 - bannergrid layout favorite btn pos x"),
-								thInt("13 - bannergrid layout favorite btn pos y"));
+								thInt("375 - bannergrid layout favorite btn pos y"));
 		searchBtn->SetPosition(Settings.widescreen ? thInt("176 - bannergrid layout search btn pos x widescreen") : thInt("140 - bannergrid layout search btn pos x"),
-								thInt("13 - bannergrid layout search btn pos y"));
+								thInt("375 - bannergrid layout search btn pos y"));
 		sortBtn->SetPosition(Settings.widescreen ? thInt("208 - bannergrid layout abc/sort btn pos x widescreen") : thInt("180 - bannergrid layout abc/sort btn pos x"),
-								thInt("13 - bannergrid layout abc/sort btn pos y"));
+								thInt("375 - bannergrid layout abc/sort btn pos y"));
 		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("240 - bannergrid layout loadermode btn pos x widescreen") : thInt("220 - bannergrid layout loadermode btn pos x"),
-								thInt("13 - bannergrid layout loadermode btn pos y"));
+								thInt("375 - bannergrid layout loadermode btn pos y"));
 		categBtn->SetPosition(Settings.widescreen ? thInt("272 - bannergrid layout category btn pos x widescreen") : thInt("260 - bannergrid layout category btn pos x"),
-								thInt("13 - bannergrid layout category btn pos y"));
+								thInt("375 - bannergrid layout category btn pos y"));
 		listBtn->SetPosition(Settings.widescreen ? thInt("304 - bannergrid layout list btn pos x widescreen") : thInt("300 - bannergrid layout list btn pos x"),
-								thInt("13 - bannergrid layout list btn pos y"));
+								thInt("375 - bannergrid layout list btn pos y"));
 		gridBtn->SetPosition(Settings.widescreen ? thInt("336 - bannergrid layout grid btn pos x widescreen") : thInt("340 - bannergrid layout grid btn pos x"),
-								thInt("13 - bannergrid layout grid btn pos y"));
+								thInt("375 - bannergrid layout grid btn pos y"));
 		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - bannergrid layout carousel btn pos x widescreen") : thInt("380 - bannergrid layout carousel btn pos x"),
-								thInt("13 - bannergrid layout carousel btn pos y"));
+								thInt("375 - bannergrid layout carousel btn pos y"));
 		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - bannergrid layout bannergrid btn pos x widescreen") : thInt("420 - bannergrid layout bannergrid btn pos x"),
-								thInt("13 - bannergrid layout bannergrid btn pos y"));
+								thInt("375 - bannergrid layout bannergrid btn pos y"));
 		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - bannergrid layout lock btn pos x widescreen") : thInt("460 - bannergrid layout lock btn pos x"),
-								thInt("13 - bannergrid layout lock btn pos y"));
+								thInt("375 - bannergrid layout lock btn pos y"));
 		dvdBtn->SetPosition(Settings.widescreen ? thInt("464 - bannergrid layout dvd btn pos x widescreen") : thInt("500 - bannergrid layout dvd btn pos x"),
-								thInt("13 - bannergrid layout dvd btn pos y"));
-
+								thInt("375 - bannergrid layout dvd btn pos y"));
+		WiiTabBtn->SetPosition(40,0);
+		GCNTabBtn->SetPosition(225,0);
+		VCWWTabBtn->SetPosition(415,0);
 		gameBrowser = new GuiBannerGrid(Settings.GameListOffset + Settings.SelectedGame);
 	}
 
@@ -878,6 +944,9 @@ void GameBrowseMenu::ReloadBrowser()
 	Append(bannerGridBtn);
 	Append(lockBtn);
 	Append(dvdBtn);
+	Append(WiiTabBtn);
+	Append(GCNTabBtn);
+	Append(VCWWTabBtn);
 
 	if ((Settings.hddinfo == CLOCK_HR12) || (Settings.hddinfo == CLOCK_HR24))
 	{
@@ -1262,6 +1331,84 @@ int GameBrowseMenu::MainLoop()
 			gameList.FilterList();
 			ReloadBrowser();
 		}
+	}
+	
+	else if(WiiTabBtn->GetState() == STATE_CLICKED)
+	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_MODE_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WiiTabBtn->ResetState();
+			return returnMenu;
+		}
+
+		int choice = MODE_WIIGAMES;
+		if(choice != CheckedNone && choice != Settings.LoaderMode)
+		{
+			Settings.LoaderMode = choice;
+
+			if((Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
+			{
+				WBFS_ReInit(WBFS_DEVICE_USB);
+				gameList.ReadGameList();
+
+				if(Settings.ShowFreeSpace)
+				{
+					ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+					ThreadedTask::Instance()->Execute();
+				}
+			}
+
+			wString oldFilter(gameList.GetCurrentFilter());
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+			gameList.FilterList(oldFilter.c_str());
+			ReloadBrowser();
+		}
+		WiiTabBtn->ResetState();
+	}
+	
+	else if(GCNTabBtn->GetState() == STATE_CLICKED)
+	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_MODE_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			GCNTabBtn->ResetState();
+			return returnMenu;
+		}
+
+		int choice = MODE_GCGAMES;
+		if(choice != CheckedNone && choice != Settings.LoaderMode)
+		{
+			Settings.LoaderMode = choice;
+
+			wString oldFilter(gameList.GetCurrentFilter());
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+			gameList.FilterList(oldFilter.c_str());
+			ReloadBrowser();
+		}
+		GCNTabBtn->ResetState();
+	}
+	
+	else if(VCWWTabBtn->GetState() == STATE_CLICKED)
+	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_MODE_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			VCWWTabBtn->ResetState();
+			return returnMenu;
+		}
+
+		int choice = MODE_EMUCHANNELS;
+		if(choice != CheckedNone && choice != Settings.LoaderMode)
+		{
+			Settings.LoaderMode = choice;
+
+			wString oldFilter(gameList.GetCurrentFilter());
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+			gameList.FilterList(oldFilter.c_str());
+			ReloadBrowser();
+		}
+		VCWWTabBtn->ResetState();
 	}
 
 	else if(loaderModeBtn->GetState() == STATE_CLICKED)

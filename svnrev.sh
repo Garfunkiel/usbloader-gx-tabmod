@@ -15,8 +15,8 @@ while [ "$a" ]; do
 	a=$(echo $rev_new_raw | sed 's/\([0-9]*\).*/\1/')
 done
 
-rev_old=$(cat ./source/svnrev.c 2>/dev/null | tr -d '\n' | sed 's/[^0-9]*\([0-9]*\).*/\1/')
-
+rev_old=$(cat ./source/svnrev.c 2>/dev/null | tr -d '\n' | sed 's/[^0-9]*\([0-9]*\).*/\1/')-tabmod
+rev_new="$rev_old" #ignore svn
 if [ "$rev_new" != "$rev_old" ] || [ ! -f ./source/svnrev.c ]; then
 
 	cat <<EOF > ./source/svnrev.c
@@ -37,7 +37,6 @@ EOF
 fi
 
 
-rev_new=`expr $rev_new + 1`
 rev_date=`date -u +%Y%m%d%H%M%S`
 
 cat <<EOF > ./HBC/META.XML

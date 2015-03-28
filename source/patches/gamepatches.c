@@ -168,7 +168,7 @@ bool NSMBPatch()
 {
 	WIP_Code * CodeList = NULL;
 
-	if (memcmp("SMNE01", (char *) 0x80000000, 6) == 0)
+	if ((memcmp("SMNE01", (char *) 0x80000000, 6) == 0)||(memcmp("AMNE01", (char *) 0x80000000, 6) == 0))
 	{
 		CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
 		if(!CodeList)

@@ -55,8 +55,8 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetTextf("v3.0  Rev%s", GetRev());
 #endif
 
-#if 0 // enable if you release a modded version
-	versionTxt->SetTextf("v3.0  Rev%s mod", GetRev());
+#if 1 // enable if you release a modded version
+	versionTxt->SetTextf("v3.0  Rev%s tabmod", GetRev());
 #endif
 
 	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor) {255, 255, 255, 255});
